@@ -1,0 +1,16 @@
+{
+  "name": "babel-fish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build": "tailwindcss -i ./input.css -o ./css/main.css",
+    "watch": "tailwindcss -i ./input.css -o ./css/main.css --watch"
+  },
+  "keywords": [],
+  "author": "spencer miller",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}
