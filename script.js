@@ -14,7 +14,7 @@ var button = document.getElementById('clickSTT')
 
 button.onclick = function() {
   recognition.start();
-  console.log('Ready to receive a color command.');
+  console.log('Listening for sentence.');
 }
 
 recognition.onresult = function(event) {
@@ -27,9 +27,9 @@ recognition.onspeechend = function() {
   recognition.stop();
 }
 
-recognition.onnomatch = function(event) {
-  diagnostic.textContent = "I didn't recognise that color.";
-}
+// recognition.onnomatch = function(event) {
+//   diagnostic.textContent = "I.";
+// }
 
 recognition.onerror = function(event) {
   diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
