@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
+const http = require('http')
+
+const server = http.createServer(app)
 
 //any url can access our backedn url
-const io = require('socket.io')(http, {
+const io = require('socket.io')(server, {
     cors: {origin:"*"}
 })
 
@@ -16,6 +19,6 @@ io.on('connection', (socket) => {
 })
 
 
-app.listen(8000, () => {
-    'server running on http:/localhost:8000'
+server.listen(8000, () => {
+    console.log('server running on http://localhost:8000')
 })
