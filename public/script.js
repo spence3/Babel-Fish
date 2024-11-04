@@ -1,6 +1,5 @@
-const socket = io('ws://localhost:8000'); // Connect to your server
-
-//variables
+const socket = io('ws://localhost:8000'); // Connect to server
+//text to speech variables
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -45,6 +44,8 @@ recognition.onerror = function(event) {
 
 socket.on('message', message => {
   displayMessage.value += message + '\n'
+  var spanishText = message.split('\n')[1]
+  console.log(`Message on the script.js ${spanishText}`)
 })
 
 sendButton.onclick = function() {

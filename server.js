@@ -22,8 +22,8 @@ function run(){
                 console.log(`message before translation ${message}`)
                 const prompt = `only respond with ${message} translated into spanish`
                 const result = await model.generateContent(prompt)
-                console.log('message', `${socket.id.substr(0,2)} said ${message}`)
-                await io.emit('message', `${socket.id.substr(0,2)} said: ${message} \n Translation: ${result.response.text()}.`)
+                console.log('message', `${socket.id.substr(0,2)} said: ${message} \n Translation: ${result.response.text()}.`)
+                await io.emit('message', `${socket.id.substr(0,2)} said: ${message}\n${result.response.text()}.`)
             }
             catch(error){
                 console.error("error with translate!", error)
