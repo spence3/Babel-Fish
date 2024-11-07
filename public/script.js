@@ -1,4 +1,8 @@
 const socket = io('ws://localhost:8000'); // Connect to server
+
+//text to speech
+const synth = window.speechSynthesis;
+const voices = synth.getVoices()
 //text to speech variables
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
@@ -42,10 +46,44 @@ recognition.onerror = function(event) {
   diagnostic.textContent = 'Error occurred in recognition: ' + event.error
 }
 
+function speakMessage(spanishText){
+  if (synth.speaking) {
+    console.error("speechSynthesis.speaking");
+    return;
+  }
+
+  if (true) {
+    // const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+    const utterThis = new SpeechSynthesisUtterance(spanishText);//----------
+    
+
+    //done talking
+    utterThis.onend = function (event) {
+      console.log("SpeechSynthesisUtterance.onend");
+    };
+
+    //error with speech synthesis
+    utterThis.onerror = function (event) {
+      console.error("SpeechSynthesisUtterance.onerror");
+    };
+    // console.log(voiceSelect)
+
+    const englishVoice = 'Aaron'
+    const spanishVoice = 'Flo (Spanish (Mexico))'
+    const findMyVoice = voices.find(voice => voice.name === englishVoice);
+
+    utterThis.voice = findMyVoice
+    utterThis.pitch = 1;//-------------
+    utterThis.rate = 1;//-------------
+
+    synth.speak(utterThis);
+  }
+}
+
 socket.on('message', message => {
   displayMessage.value += message + '\n'
   var spanishText = message.split('\n')[1]
-  console.log(`Message on the script.js ${spanishText}`)
+  speakMessage(spanishText)
 })
 
 sendButton.onclick = function() {
